@@ -1,0 +1,8 @@
+## Dependências
+node_modules
+
+## build da aplicação em JS
+build
+
+## Variáveis de ambiente, dados sensíveis
+.env

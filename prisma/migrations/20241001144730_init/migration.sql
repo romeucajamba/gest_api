@@ -1,0 +1,24 @@
+-- CreateTable
+CREATE TABLE `Product` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `brand` VARCHAR(191) NOT NULL,
+    `model` VARCHAR(191) NOT NULL,
+    `price` DOUBLE NOT NULL,
+    `currency` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ExchangeRate` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `from` VARCHAR(191) NOT NULL,
+    `to` VARCHAR(191) NOT NULL,
+    `rate` DOUBLE NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
