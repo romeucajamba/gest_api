@@ -35,5 +35,5 @@ export async function registerProductController( request: FastifyRequest, reply:
     throw err
   }
   
-  reply.status(201).send({message: "Prduct created ✔"});
+  reply.status(201).send({message: "Product registed ✔"});
 }

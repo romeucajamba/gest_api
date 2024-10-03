@@ -7,8 +7,7 @@ export async function getAllProductController(request: FastifyRequest, reply: Fa
     
         const getProducts = getProductUseCase();
       
-        const getProduct = await getProducts.execute({
-        });
+        const getProduct = await getProducts.execute();
       
         reply.status(200).send({message: getProduct});
     

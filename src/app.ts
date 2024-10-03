@@ -16,7 +16,7 @@ app.setErrorHandler((error, _, reply) => {
         console.error(error)
     }
     else {
-        //Utilizar ferramenta de observação para poder ser avisado que o erro aconteceu quando estiver em produção
+    
     }
 
     return reply.status(500).send({message:'erro interno no servidor'})

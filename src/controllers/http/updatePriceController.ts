@@ -1,37 +1,28 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { BadError } from '../../error/error';
+import { updatePriceUseCase } from "../factory/update";
 
-export async function updatePriceController(){}
-
-
-// Rota para aplicar câmbio e atualizar os preços
-fastify.post('/products/update-prices', async (request, reply) => {
-    const { from, to, rate } = z
-      .object({
-        from: z.string().length(3),
-        to: z.string().length(3),
-        rate: z.number().positive(),
-      })
-      .parse(request.body);
-  
-    // Obtem os produtos na moeda original e atualiza os preços
-    const productsToUpdate = await prisma.product.findMany({
-      where: { currency: from },
+export async function updatePriceController(request: FastifyRequest, reply: FastifyReply){
+  try {
+        const bodySchema = z.object({
+          from: z.string().length(3),
+          to: z.string().length(3),
+          rate: z.number().positive(),
     });
-  
-    const updatedProducts = await Promise.all(
-      productsToUpdate.map(async (product) => {
-        const newPrice = product.price * rate;
-        return prisma.product.update({
-          where: { id: product.id },
-          data: {
-            price: newPrice,
-            currency: to,
-          },
-        });
-      })
-    );
-  
+
+    const { from, rate, to } = bodySchema.parse(request.body);
+
+    const products = updatePriceUseCase();
+    const  updatedProducts = await products.execute({ from, rate, to });
+
     return reply.send(updatedProducts);
-  });
+
+  } catch (error) {
+    if (error instanceof BadError) {
+       reply.status(500).send({message: error.message});
+    }
+
+    throw error;
+  }
+}

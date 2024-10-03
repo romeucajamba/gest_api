@@ -1,9 +1,9 @@
-import {  } from '';
-import {  } from '';
+import { ProductDatabase } from '../../repository/productDatabase';
+import { DeleteProductUseCase } from '../../service/deleteProductUseCase';
 
 export function deleteProductUseCase(){
-    const prismaRepository = new PrismaRepository();
-    const useCase = new deleteProductUsecase(prismaRepository);
+    const productRepository = new ProductDatabase();
+    const useCase = new DeleteProductUseCase(productRepository);
 
     return useCase;
 }

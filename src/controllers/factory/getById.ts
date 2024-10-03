@@ -1,9 +1,9 @@
-import {  } from '';
-import {  } from '';
+import { ProductDatabase } from '../../repository/productDatabase';
+import { GetProductByIdUseCase } from '../../service/getProductByIdUseCase';
 
 export function getProductByIdUseCase(){
-    const prismaRepository = new PrismaRepository();
-    const useCase = new GetProducByIdtUsecase(prismaRepository);
+    const productRepository = new ProductDatabase();
+    const useCase = new GetProductByIdUseCase(productRepository);
 
     return useCase;
 }
